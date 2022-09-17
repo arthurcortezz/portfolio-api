@@ -39,11 +39,9 @@ app.post("/login/", (req, res) => {
 });
 
 //port
-app.listen(3001);
-
 mongoose.connect(`mongodb+srv://gestor:sysadmin@cluster.snmb0du.mongodb.net/portfoliodb?retryWrites=true&w=majority`)
 .then(()=>{
-  app.listen(3002)
+  app.listen(3001)
   console.log("connected mongodb")
 })
 .catch((error)=> console.log(error))
