@@ -23,11 +23,9 @@ try {
       reason: req.body.reason,
       message: req.body.message,
     };
-    return res.json({ object: object });
+    return res.status(202).json({ object: object });
   });
-} catch (error) {
-  console.log("🚀 ~ file: index.ts ~ line 29 ~ error", error);
-}
+} catch (error) {}
 
 app.post("/login/", (req: any, res: any) => {
   if (req.body.user === "tuca" && req.body.pass === "123") {
