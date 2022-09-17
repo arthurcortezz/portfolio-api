@@ -16,16 +16,14 @@ app.use(cors());
 app.listen(3001);
 
 //routes
-try {
-  app.post("/comment", (req: any, res: any) => {
-    const object: any = {
-      name: req.body.name,
-      reason: req.body.reason,
-      message: req.body.message,
-    };
-    return res.status(202).json({ object: object });
-  });
-} catch (error) {}
+app.post("/comment", (req: any, res: any) => {
+  const object: any = {
+    name: req.body.name,
+    reason: req.body.reason,
+    message: req.body.message,
+  };
+  return res.status(202).json({ object: object });
+});
 
 app.post("/login/", (req: any, res: any) => {
   if (req.body.user === "tuca" && req.body.pass === "123") {
