@@ -40,5 +40,5 @@ app.post("/comment", (req, res) => {
       reason: req.body.reason,
       message: req.body.message,
     };
-    return res.status(202).json({ object: object });
+    return res.status(202).json(object);
   });
