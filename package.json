@@ -4,8 +4,9 @@
   "description": "",
   "main": "src/index.ts",
   "scripts": {
-    "start": "nodemon ./src/index.ts",
-    "dev": "nodemon ./src/index.ts"
+    "start": "node ./src/index.ts",
+    "dev": "nodemon ./src/index.ts",
+    "deploy": "git add . && git commit -m deploy && git push"
   },
   "repository": {
     "type": "git",
