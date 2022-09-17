@@ -16,14 +16,18 @@ app.use(cors());
 app.listen(3001);
 
 //routes
-app.post("/comment", (req: any, res: any) => {
-  const object: any = {
-    name: req.body.name,
-    reason: req.body.reason,
-    message: req.body.message,
-  };
-  return res.json({ object: object });
-});
+try {
+  app.post("/comment", (req: any, res: any) => {
+    const object: any = {
+      name: req.body.name,
+      reason: req.body.reason,
+      message: req.body.message,
+    };
+    return res.json({ object: object });
+  });
+} catch (error) {
+  console.log("🚀 ~ file: index.ts ~ line 29 ~ error", error);
+}
 
 app.post("/login/", (req: any, res: any) => {
   if (req.body.user === "tuca" && req.body.pass === "123") {
