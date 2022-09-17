@@ -1,5 +1,4 @@
-import cors from "cors";
-
+const cors = require("cors");
 const express = require("express");
 const jwt = require("jsonwebtoken");
 const app = express();
@@ -16,16 +15,16 @@ app.use(cors());
 app.listen(3001);
 
 //routes
-app.post("/comment", (req: any, res: any) => {
-  const object: any = {
+app.post("/comment", (req, res) => {
+  const object = {
     name: req.body.name,
     reason: req.body.reason,
     message: req.body.message,
   };
-  return res.status(202).json({ object: object });
+  return res.status(202).json(object);
 });
 
-app.post("/login/", (req: any, res: any) => {
+app.post("/login/", (req, res) => {
   if (req.body.user === "tuca" && req.body.pass === "123") {
     const token = jwt.sign({ idUser: 1 }, SECRET, { expiresIn: 500 });
     console.log("Login");
