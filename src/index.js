@@ -1,8 +1,11 @@
-const cors = require("cors");
 const express = require("express");
-const jwt = require("jsonwebtoken");
 const app = express();
+const cors = require("cors");
+const jwt = require("jsonwebtoken");
 const SECRET = "tuca1";
+const mongoose = require('mongoose')
+
+const Comment = require("./models/Comment")
 
 //read json / midlewares
 var corsOptions = { origin: "*", credentials: true };
@@ -11,17 +14,19 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
 
-//port
-app.listen(3001);
-
 //routes
-app.post("/comment", (req, res) => {
-  const object = {
+app.post("/comment", async (req, res)  => {
+  const comment = {
     name: req.body.name,
     reason: req.body.reason,
     message: req.body.message,
   };
-  return res.status(202).json(object);
+  try {
+    await Comment.create(comment)
+    res.status(202).json(comment);
+  } catch (error) {
+    res.status(500).json({error:error})
+  }
 });
 
 app.post("/login/", (req, res) => {
@@ -32,3 +37,13 @@ app.post("/login/", (req, res) => {
   }
   res.status(401).end();
 });
+
+//port
+app.listen(3001);
+
+mongoose.connect(`mongodb+srv://gestor:sysadmin@cluster.snmb0du.mongodb.net/portfoliodb?retryWrites=true&w=majority`)
+.then(()=>{
+  app.listen(3002)
+  console.log("connected mongodb")
+})
+.catch((error)=> console.log(error))
