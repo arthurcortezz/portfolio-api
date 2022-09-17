@@ -4,8 +4,8 @@
   "description": "",
   "main": "src/index.ts",
   "scripts": {
-    "start": "nodemon ./src/index.ts localhost 3001",
-    "dev": "nodemon ./src/index.ts localhost 3001"
+    "start": "nodemon ./src/index.ts",
+    "dev": "nodemon ./src/index.ts"
   },
   "repository": {
     "type": "git",
