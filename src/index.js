@@ -10,8 +10,6 @@ var mongoose = require('mongoose')
 const Comment = require("./models/Comment")
 
 //read json / midlewares
-
-app.use(allowCrossDomain);
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
