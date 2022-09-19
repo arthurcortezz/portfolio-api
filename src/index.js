@@ -1,3 +1,4 @@
+//initial configs
 var express = require("express");
 var app = express();
 var cors = require("cors");
@@ -5,23 +6,15 @@ var jwt = require("jsonwebtoken");
 var SECRET = "tuca1";
 var mongoose = require('mongoose')
 
+//Models
 const Comment = require("./models/Comment")
 
 //read json / midlewares
-var allowCrossDomain = function(req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-  res.header('Access-Control-Allow-Headers', 'Content-Type');
-
-  next();
-}
-var corsOptions = { origin: "*", credentials: true };
 
 app.use(allowCrossDomain);
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(cors());
 
 //routes
 app.post("/comment", async (req, res)  => {
@@ -34,7 +27,7 @@ app.post("/comment", async (req, res)  => {
     await Comment.create(comment)
     res.status(202).json(comment);
   } catch (error) {
-    res.status(500).json({error:error})
+    res.status(500).json(error)
   }
 });
 
