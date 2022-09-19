@@ -9,7 +9,7 @@ const Comment = require("./models/Comment")
 
 //read json / midlewares
 var allowCrossDomain = function(req, res, next) {
-  res.header('Access-Control-Allow-Origin', 'https://portfolio-k8kf-k5a9ewbq5-arthurcortezz.vercel.app');
+  res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
   res.header('Access-Control-Allow-Headers', 'Content-Type');
 
