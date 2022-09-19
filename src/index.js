@@ -1,14 +1,23 @@
-const express = require("express");
-const app = express();
-const cors = require("cors");
-const jwt = require("jsonwebtoken");
-const SECRET = "tuca1";
-const mongoose = require('mongoose')
+var express = require("express");
+var app = express();
+var cors = require("cors");
+var jwt = require("jsonwebtoken");
+var SECRET = "tuca1";
+var mongoose = require('mongoose')
 
 const Comment = require("./models/Comment")
 
 //read json / midlewares
+var allowCrossDomain = function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', 'https://portfolio-k8kf-k5a9ewbq5-arthurcortezz.vercel.app/');
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+
+  next();
+}
 var corsOptions = { origin: "*", credentials: true };
+
+app.use(allowCrossDomain);
 app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
