@@ -29,6 +29,10 @@ export default class NotificacaoController {
   ) {
     try {
       const { endpoint, expirationTime, keys } = request.body;
+      console.log(
+        "🚀 ~ file: notificationController.ts ~ line 32 ~ NotificacaoController ~ endpoint",
+        endpoint
+      );
       await NotificationService.newSubscription({
         endpoint,
         expirationTime,
