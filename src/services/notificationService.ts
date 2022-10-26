@@ -35,21 +35,19 @@ class NotificacaoService {
       const payloadJson = JSON.stringify(payload);
       subscriptions.forEach((e: any) => {
         const pushSubscription = {
-          endpoint: e.subscription.endpoint,
+          endpoint: e.endpoint,
           keys: {
-            p256dh: e.subscription.keys.p256dh,
-            auth: e.subscription.keys.auth,
+            p256dh: e.keys.p256dh,
+            auth: e.keys.auth,
           },
         };
         // const solicitacao: TipoStatusSolicitacao = Solicitacao.find({ idOwner: e.user });
         // if (solicitacao) {
-        webpush
-          .sendNotification(pushSubscription, payloadJson, options)
-          .catch((error: any) => {
-            if (error.statusCode === 410) {
-              this.deleteSubscription(error.endpoint);
-            }
-          });
+        webpush.sendNotification(pushSubscription, payloadJson, options).catch((error: any) => {
+          if (error.statusCode === 410) {
+            this.deleteSubscription(error.endpoint);
+          }
+        });
         // }
       });
     } catch (error: any) {
@@ -69,10 +67,7 @@ class NotificacaoService {
         endpoint: opcoes.endpoint,
       });
       if (notificacaoBuscada) {
-        await NotificationPush.updateOne(
-          { _id: notificacaoBuscada._id },
-          opcoes
-        );
+        await NotificationPush.updateOne({ _id: notificacaoBuscada._id }, opcoes);
       } else {
         await new NotificationPush(opcoes).save();
       }

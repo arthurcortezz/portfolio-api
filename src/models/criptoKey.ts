@@ -1,6 +1,6 @@
 import { Schema, model } from "mongoose";
 
-const chaveCriptografiaSchema = new Schema({
+const criptoKey = new Schema({
   codigo: {
     type: String,
   },
@@ -19,4 +19,4 @@ const chaveCriptografiaSchema = new Schema({
   },
 });
 
-export default model("chaves-criptografia", chaveCriptografiaSchema);
+export default model("cripto-key", criptoKey);

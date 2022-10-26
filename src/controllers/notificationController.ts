@@ -2,11 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import { NotificationService } from "../services";
 
 export default class NotificacaoController {
-  async notificacaoPush(
-    request: Request,
-    response: Response,
-    next: NextFunction
-  ) {
+  async notificacaoPush(request: Request, response: Response, next: NextFunction) {
     try {
       await NotificationService.notificacaoPush();
       response.locals.menssagem = {
@@ -15,24 +11,15 @@ export default class NotificacaoController {
         },
       };
       response.locals.codigo = 200;
-      next();
+      // next();
     } catch (error: any) {
-      if (error.codigo)
-        return response.status(error.codigo).json(error.mensagem);
+      if (error.codigo) return response.status(error.codigo).json(error.mensagem);
       else return response.status(500).json("Error.");
     }
   }
-  async newSubscription(
-    request: Request,
-    response: Response,
-    next: NextFunction
-  ) {
+  async newSubscription(request: Request, response: Response, next: NextFunction) {
     try {
       const { endpoint, expirationTime, keys } = request.body;
-      console.log(
-        "🚀 ~ file: notificationController.ts ~ line 32 ~ NotificacaoController ~ endpoint",
-        endpoint
-      );
       await NotificationService.newSubscription({
         endpoint,
         expirationTime,
@@ -44,10 +31,9 @@ export default class NotificacaoController {
         },
       };
       response.locals.codigo = 200;
-      next();
+      // next();
     } catch (error: any) {
-      if (error.codigo)
-        return response.status(error.codigo).json(error.mensagem);
+      if (error.codigo) return response.status(error.codigo).json(error.mensagem);
       else return response.status(500).json("Error.");
     }
   }
