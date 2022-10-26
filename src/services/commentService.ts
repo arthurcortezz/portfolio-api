@@ -1,5 +1,5 @@
 class CommentService {
-  async newComment(object) {
+  async newComment(object: any) {
     console.log(
       "🚀 ~ file: commentService.ts ~ line 3 ~ CommentService ~ newComment ~ object",
       object

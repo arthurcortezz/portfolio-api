@@ -8,13 +8,13 @@ export class CommentController {
         _id: request.body._id,
         message: request.body.message,
       };
-      const result = await CommentService.newComment(comment);
+      const result: any = await CommentService.newComment(comment);
       response.locals.message = {
         res: result,
       };
       response.locals.code = 200;
       next();
-    } catch (error) {
+    } catch (error: any) {
       if (error.code) return response.status(error.code).json(error.message);
       return response.status(500).json(error);
     }
