@@ -2,7 +2,7 @@
   "name": "portfolio-api",
   "version": "1.0.0",
   "description": "",
-  "main": "./index.ts",
+  "main": "dist/index.js",
   "scripts": {
     "start": "node ./src/index.ts",
     "dev": "ts-node-dev ./index.ts",
