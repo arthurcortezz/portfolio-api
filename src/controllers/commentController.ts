@@ -1,8 +1,21 @@
 import { Request, Response, NextFunction } from "express";
 import { CommentService } from "../services";
+import { Comment } from "../models";
 
 export class CommentController {
   async newComment(request: Request, response: Response, next: NextFunction) {
+    try {
+      const comment = {
+        name: request.body.name,
+        reason: request.body.reason,
+        message: request.body.message,
+      };
+      await Comment.create(comment);
+      response.status(202).json(comment);
+    } catch (error) {
+      response.status(500).json(error);
+    }
+
     try {
       const comment: any = {
         _id: request.body._id,
