@@ -4,6 +4,7 @@
   "description": "",
   "main": "src/index.ts",
   "scripts": {
+    "build": "tsc && rm -v -rf src",
     "start": "node ./src/index.ts",
     "dev": "ts-node-dev ./src/index.ts",
     "deploy": "git add . && git commit -m deploy && git push"
