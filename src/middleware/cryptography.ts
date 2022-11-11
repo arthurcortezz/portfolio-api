@@ -12,18 +12,18 @@ export interface AesKey {
   iv: string;
 }
 
-class Criptografia {
-  criptografar(request: Request, response: Response, next: NextFunction) {
-    const criptografia = new CriptoService();
-    let criptografada = criptografia.encrypt(response.locals.menssagem);
-    response.status(response.locals.codigo).json({ message: criptografada });
+class Cryptography {
+  crypt(request: Request, response: Response, next: NextFunction) {
+    const cryptography = new CriptoService();
+    let encrypted = cryptography.encrypt(response.locals.message);
+    response.status(response.locals.code).json({ message: encrypted });
   }
-  descriptografar(request: Request, response: Response, next: NextFunction) {
-    const criptografia = new CriptoService();
-    let descriptografada = criptografia.decrypt(request.body.message);
-    request.body = descriptografada;
+  uncrypt(request: Request, response: Response, next: NextFunction) {
+    const cryptography = new CriptoService();
+    let uncrypted = cryptography.decrypt(request.body.message);
+    request.body = uncrypted;
     next();
   }
 }
 
-export default Criptografia;
+export default Cryptography;

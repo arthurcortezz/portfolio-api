@@ -11,7 +11,7 @@ export class CriptoService {
   }
 
   encryptOtherKey = (object: any) => {
-    const publicKey = process.env.VAPID_PUBLIC_KEY;
+    const publicKey = process.env.NEXT_STATIC_PUB_KEY;
     if (!publicKey) throw new CustomException("Key not found", 500);
     const jsonMsg = JSON.stringify(object);
     const encrypted = this.crypt.encrypt(publicKey, jsonMsg);
@@ -20,7 +20,7 @@ export class CriptoService {
   };
 
   encrypt = (object: any) => {
-    const publicKey = process.env.VAPID_PUBLIC_KEY;
+    const publicKey = process.env.NEXT_STATIC_PUB_KEY;
     if (!publicKey) throw new CustomException("Key not found", 500);
     const jsonMsg = JSON.stringify(object);
     const encrypted = this.crypt.encrypt(publicKey, jsonMsg);

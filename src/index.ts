@@ -6,7 +6,12 @@ import { connect } from "mongoose";
 import { Routes } from "./routes";
 import { mongooseUri } from "./config";
 
-connect(mongooseUri, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true });
+connect(mongooseUri, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useFindAndModify: false,
+  useCreateIndex: true,
+});
 const app = express();
 app.use(helmet());
 app.use(cors());

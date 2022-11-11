@@ -1,5 +1,5 @@
 import { CustomException } from "../exceptions";
-import { NotificationPush } from "../models";
+import { NotificationModel } from "../models";
 const TextMessageService = require("comtele-sdk").TextMessageService;
 
 const webpush = require("web-push");
@@ -20,7 +20,7 @@ interface Keys {
 class NotificacaoService {
   async notificacaoPush() {
     try {
-      const subscriptions = await NotificationPush.find();
+      const subscriptions = await NotificationModel.find();
       const payload = {
         title: "Teste de notificações",
         message: "Testando o service worker para enviar push de notificação",
@@ -56,20 +56,20 @@ class NotificacaoService {
   }
   async deleteSubscription(endpoint: string) {
     try {
-      await NotificationPush.deleteOne({ "subscription.endpoint": endpoint });
+      await NotificationModel.deleteOne({ "subscription.endpoint": endpoint });
     } catch (error: any) {
       throw new CustomException(error.mensagem, error.codigo);
     }
   }
   async newSubscription(opcoes: Subscription) {
     try {
-      const notificacaoBuscada = await NotificationPush.findOne({
+      const notificacaoBuscada = await NotificationModel.findOne({
         endpoint: opcoes.endpoint,
       });
       if (notificacaoBuscada) {
-        await NotificationPush.updateOne({ _id: notificacaoBuscada._id }, opcoes);
+        await NotificationModel.updateOne({ _id: notificacaoBuscada._id }, opcoes);
       } else {
-        await new NotificationPush(opcoes).save();
+        await new NotificationModel(opcoes).save();
       }
     } catch (error: any) {
       throw new CustomException(error.mensagem, error.codigo);

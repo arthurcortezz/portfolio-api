@@ -1,11 +1,13 @@
+import { CommentModel } from "../models";
+
 class CommentService {
   async newComment(object: any) {
-    console.log(
-      "🚀 ~ file: commentService.ts ~ line 3 ~ CommentService ~ newComment ~ object",
-      object
-    );
     try {
-      console.log("Fim");
+      const document = await new CommentModel(object).save();
+      return {
+        document: document,
+        log: `New comment from ${object.name}`,
+      };
     } catch (error) {}
   }
 }

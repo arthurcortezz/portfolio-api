@@ -1,16 +1,18 @@
 import { Request, Response, NextFunction } from "express";
-import { CommentService } from "../services";
+import { CommentModel } from "../models";
 
 export class CommentController {
   async newComment(request: Request, response: Response, next: NextFunction) {
     try {
       const comment: any = {
-        _id: request.body._id,
         message: request.body.message,
+        name: request.body.message,
+        reason: request.body.message,
       };
-      const result: any = await CommentService.newComment(comment);
+      const document = await new CommentModel(comment).save();
       response.locals.message = {
-        res: result,
+        response: document,
+        log: `New comment from ${comment.name}`,
       };
       response.locals.code = 200;
       next();

@@ -1,7 +1,7 @@
 const Hybrid = require("@kaduzinghost/hybrid-crypto");
 import { v4 as uuid } from "uuid";
 import { CustomException } from "../../exceptions";
-import { CriptoKey } from "../../models";
+import { CriptoKeyModel } from "../../models";
 
 class ChaveCriptografiaService {
   rsa: any;
@@ -35,7 +35,7 @@ class ChaveCriptografiaService {
         chavePrivada: chave.privateKey,
         dataLimite: data.getTime(),
       };
-      const resultado: any = await new CriptoKey(codigo).save();
+      const resultado: any = await new CriptoKeyModel(codigo).save();
       return {
         codigo: resultado.codigo,
         chavePublica: resultado.chavePublica,
@@ -47,7 +47,7 @@ class ChaveCriptografiaService {
 
   buscarCodigo = async (codigo: String) => {
     try {
-      const resultado = await CriptoKey.findOne({ codigo: codigo });
+      const resultado: any = await CriptoKeyModel.findOne({ codigo: codigo });
       if (!resultado) throw new CustomException("Não encontrado", 404);
       const { _doc } = resultado;
       return _doc;
