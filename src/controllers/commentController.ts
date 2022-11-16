@@ -6,8 +6,8 @@ export class CommentController {
     try {
       const comment: any = {
         message: request.body.message,
-        name: request.body.message,
-        reason: request.body.message,
+        name: request.body.name,
+        reason: request.body.reason,
       };
       const document = await new CommentModel(comment).save();
       response.locals.message = {
