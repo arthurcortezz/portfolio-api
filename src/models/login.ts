@@ -2,7 +2,10 @@ import { Schema, model } from "mongoose";
 
 const loginSchema = new Schema({
   user: String,
+  email: String,
+  phone: String,
   pass: String,
+  confirmPass: String,
   createdon: { type: Number, default: new Date().getTime() },
   updatedon: { type: Number, default: 0 },
 });

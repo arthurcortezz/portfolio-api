@@ -1,3 +1,4 @@
+import { CustomException } from "../exceptions";
 import { LoginModel } from "../models";
 
 class CommentService {
@@ -8,32 +9,42 @@ class CommentService {
       if (userAuthentication) {
         if (object.user === userAuthentication.user && object.pass === userAuthentication.pass) {
           return {
-            teste: "Senha correta",
+            code: 200,
+            message: "Successful login!",
           };
         } else {
           return {
-            teste: "Senha incorreta",
+            code: 500,
+            message: "Wrong Password.",
           };
         }
       } else {
-        // document = await new LoginModel(object).save();
+        return {
+          code: 404,
+          message: "User not registred.",
+        };
       }
-      return {
-        document: document,
-        log: `New comment from ${object.user}`,
-      };
-    } catch (error) {}
+    } catch (error) {
+      throw new CustomException(error.message, error.codigo);
+    }
   }
   async register(object: any) {
     try {
-      let document;
-      const userAuthentication = await LoginModel.findOne({ user: object.user });
-      if (userAuthentication) {
+      const userAuthenticationMail = await LoginModel.findOne({ email: object.email });
+      const userAuthenticationUser = await LoginModel.findOne({ user: object.user, email: object.email });
+      if (userAuthenticationMail || userAuthenticationUser) {
         return {
-          return: "User already registred!",
+          code: 500,
+          message: "User already registred.",
         };
       } else {
-        document = await new LoginModel(object).save();
+        const document = await new LoginModel(object).save();
+        if (document) {
+          return {
+            code: 200,
+            message: `User registred successful, make login now!`,
+          };
+        }
       }
       return {
         document: document,
